@@ -3,22 +3,21 @@
 #include <time.h>
 
 #define MAX_PROCESSES 5
-#define TIME_QUANTUM_1 2 // Time quantum for high priority queue
-#define TIME_QUANTUM_2 4 // Time quantum for low priority queue
-
+#define TIME_QUANTUM_1 2 
+#define TIME_QUANTUM_2 4 
 typedef struct {
     int id;
     int burstTime;
     int remainingTime;
-    int queueLevel; // 0 for high priority, 1 for low priority
+    int queueLevel;
 } Process;
 
 void initializeProcesses(Process processes[]) {
     for (int i = 0; i < MAX_PROCESSES; i++) {
         processes[i].id = i + 1;
-        processes[i].burstTime = rand() % 10 + 1; // Random burst time between 1 and 10
+        processes[i].burstTime = rand() % 10 + 1; 
         processes[i].remainingTime = processes[i].burstTime;
-        processes[i].queueLevel = 0; // Start in high priority queue
+        processes[i].queueLevel = 0;
     }
 }
 
@@ -26,11 +25,11 @@ void scheduleProcesses(Process processes[]) {
     int allDone = 0;
     
     while (!allDone) {
-        allDone = 1; // Assume all are done until proven otherwise
+        allDone = 1;
         
         for (int i = 0; i < MAX_PROCESSES; i++) {
             if (processes[i].remainingTime > 0) {
-                allDone = 0; // There is at least one process not finished
+                allDone = 0;
                 
                 int timeQuantum = (processes[i].queueLevel == 0) ? TIME_QUANTUM_1 : TIME_QUANTUM_2;
                 int timeSpent = (processes[i].remainingTime < timeQuantum) ? processes[i].remainingTime : timeQuantum;
@@ -41,7 +40,7 @@ void scheduleProcesses(Process processes[]) {
                 if (processes[i].remainingTime == 0) {
                     printf("Process %d finished.\n", processes[i].id);
                 } else if (processes[i].queueLevel == 0) {
-                    processes[i].queueLevel = 1; // Move to low priority queue after first execution
+                    processes[i].queueLevel = 1;
                 }
             }
         }
