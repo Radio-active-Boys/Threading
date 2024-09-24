@@ -12,14 +12,14 @@ int main(int args, char *argv[]) {
 
     int n = sizeof(threads) / sizeof(threads[0]);
 
-    printf("FCFS Algo\n");
-    thread_fcfs(threads, n);
-    printf("sjf Algo\n");
-    thread_sjf(threads, n);
-    printf("\nPriority Algo\n");
-    thread_priority_scheduling(threads, n);
+    // printf("FCFS Algo\n");
+    // thread_fcfs(threads, n);
+    // printf("sjf Algo\n");
+    // thread_sjf(threads, n);
+    // printf("\nPriority Algo\n");
+    // thread_priority_scheduling(threads, n);
     double timeQuantum = 2.0;
-    printf("RR Algo\n");
+    printf("RR Algo Time Quantum : %0.2f\n",timeQuantum);
     thread_rr(threads, n, timeQuantum);
 
     return 0;
